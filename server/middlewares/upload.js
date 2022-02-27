@@ -1,11 +1,14 @@
 const fs = require("fs");
 const path = require("path");
+const { dirname } = require("path");
 const multer = require("multer");
+
+const appDir = dirname(require.main.filename);
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log("file is", file);
-    const path = `./public/${file.fieldname}/`;
+    const path = `${appDir}/public/${file.fieldname}/`;
     fs.mkdirSync(path, { recursive: true });
     cb(null, path);
   },

@@ -1,8 +1,11 @@
 const fs = require("fs");
 const path = require("path");
+const { dirname } = require("path");
 const rimraf = require("rimraf");
 
 const { deleteTimeInSeconds } = require("../../config/index");
+
+const appDir = dirname(require.main.filename);
 
 function isOlder(path, ageSeconds) {
   now = new Date().getTime();
@@ -34,7 +37,7 @@ const deleteFiles = (folderPath, fileOrDir) => {
 
 const deleteTemplates = async (req, res) => {
   try {
-    const templatesFolder = `./public/templates/`;
+    const templatesFolder = `${appDir}/public/templates/`;
     const filesInDir = fs.readdirSync(templatesFolder);
 
     console.log("templates filesInDir are .....", filesInDir);
@@ -50,7 +53,7 @@ const deleteTemplates = async (req, res) => {
 
 const deleteInputDataExcel = async (req, res) => {
   try {
-    const inputDataFolder = `./public/inputData/`;
+    const inputDataFolder = `${appDir}/public/inputData/`;
     const filesInDir = fs.readdirSync(inputDataFolder);
 
     console.log("excel filesInDir are .....", filesInDir);
@@ -66,7 +69,7 @@ const deleteInputDataExcel = async (req, res) => {
 
 const deleteGeneratedFiles = async (req, res) => {
   try {
-    const genreatedFilesFolder = `./public/generateFiles/`;
+    const genreatedFilesFolder = `${appDir}/public/generateFiles/`;
     const filesInDir = fs.readdirSync(genreatedFilesFolder);
 
     console.log("generated filesInDir are .....", filesInDir);

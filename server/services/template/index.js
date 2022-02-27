@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { dirname } = require("path");
 const getFiles = require("../../utils/fileHandler");
 
 const uploadTemplate = async (req, res) => {
@@ -25,7 +26,9 @@ const uploadTemplate = async (req, res) => {
 const getTemplates = async (req, res) => {
   try {
     const templates = [];
-    const templatesFolder = `./public/permanentFiles/templates`;
+    const appDir = dirname(require.main.filename);
+    console.log("appdir is ", appDir);
+    const templatesFolder = `${appDir}/public/permanentFiles/templates`;
     //const filesInDir = fs.readdirSync(templatesFolder);
 
     let filesInDir = getFiles(templatesFolder, []);

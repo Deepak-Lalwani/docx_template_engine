@@ -1,4 +1,5 @@
 const xlsxReader = require("xlsx");
+const { dirname } = require("path");
 const getFiles = require("../../utils/fileHandler");
 
 const uploadData = async (req, res) => {
@@ -52,7 +53,8 @@ const uploadData = async (req, res) => {
 const getDataExcel = async (req, res) => {
   try {
     const templates = [];
-    const dataExcelFolder = `./public/permanentFiles/dataExcel`;
+    const appDir = dirname(require.main.filename);
+    const dataExcelFolder = `${appDir}/public/permanentFiles/dataExcel`;
     //const filesInDir = fs.readdirSync(templatesFolder);
 
     const filesInDir = getFiles(dataExcelFolder, []);

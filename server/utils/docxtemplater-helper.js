@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+const { dirname } = require("path");
 
 var PizZip = require("pizzip");
 var Docxtemplater = require("docxtemplater");
@@ -7,8 +8,8 @@ var Docxtemplater = require("docxtemplater");
 const docxtemplaterHelper = async (templateName, templatePath, data_array) => {
   try {
     // console.log("data array is ...", data_array);
-
-    const genreatedFilePath = `./public/generateFiles/${templateName}_${Date.now()}`;
+    const appDir = dirname(require.main.filename);
+    const genreatedFilePath = `${appDir}/public/generateFiles/${templateName}_${Date.now()}`;
     fs.mkdirSync(genreatedFilePath, { recursive: true });
 
     // render the document
