@@ -28,8 +28,15 @@ const getTemplates = async (req, res) => {
     const templatesFolder = `./public/permanentFiles/templates`;
     //const filesInDir = fs.readdirSync(templatesFolder);
 
-    const filesInDir = getFiles(templatesFolder, []);
+    let filesInDir = getFiles(templatesFolder, []);
     console.log("templates filesInDir are .....", filesInDir);
+
+    filesInDir = filesInDir.filter((file) => {
+      return (
+        file.originalName.indexOf("docx") > -1 ||
+        file.originalName.indexOf("xls") > -1
+      );
+    });
 
     return res.json({
       success: true,
